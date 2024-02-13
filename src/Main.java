@@ -1,4 +1,5 @@
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -9,6 +10,7 @@ public class Main {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
         int userChoice;
         char cont = 'y';
         final char QUIT = 'n';
@@ -29,10 +31,35 @@ public class Main {
                 continue;
             }
             choices play = choices.values()[userChoice];
+            int randNum = rand.nextInt(3);
             switch (play) {
-                case ROCK -> System.out.println("You lost");
-                case PAPER -> System.out.println("Tie");
-                case SCISSORS -> System.out.println("You win");
+                case ROCK -> {
+                    if (randNum == choices.ROCK.ordinal()) {
+                        System.out.println("You tie");
+                    } else if (randNum == choices.PAPER.ordinal()) {
+                        System.out.println("They picked paper. You lose");
+                    } else {
+                        System.out.println("They picked scissors. You win");
+                    }
+                }
+                case PAPER -> {
+                    if (randNum == choices.ROCK.ordinal()) {
+                        System.out.println("They picked rock. You win");
+                    } else if (randNum == choices.PAPER.ordinal()) {
+                        System.out.println("You tie");
+                    } else {
+                        System.out.println("They picked scissors. You lose");
+                    }
+                }
+                case SCISSORS -> {
+                    if (randNum == choices.ROCK.ordinal()) {
+                        System.out.println("They picked rock. You lose");
+                    } else if (randNum == choices.PAPER.ordinal()) {
+                        System.out.println("They picked paper. You win");
+                    } else {
+                        System.out.println("You tie");
+                    }
+                }
                 default -> System.out.println("Invalid choice");
             }
             System.out.print("Enter " + QUIT + " to quit or any other key to continue: ");
